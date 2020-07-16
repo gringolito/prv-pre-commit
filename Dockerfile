@@ -1,15 +1,16 @@
-FROM python:3.7-alpine
+FROM python:3.7-slim
 
 COPY . /prv
 WORKDIR /prv
 
-RUN apk update && \
-    apk upgrade && \
-    apk add --no-cache git && \
-    apk add --no-cache --virtual .build-deps build-base && \
-    pip3 install pre-commit && \
-    pre-commit install-hooks && \
-    apk del .build-deps
+RUN apt update \
+    && apt -y full-upgrade \
+    && apt install -y git gcc \
+    && pip3 install --no-cache-dir pre-commit \
+    && pre-commit install-hooks \
+    && apt purge -y gcc \
+    && apt autoremove -y \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
