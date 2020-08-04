@@ -1,0 +1,28 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.1.0
+    hooks:
+    -   id: check-yaml                          # Checks yaml files for parseable syntax
+    -   id: check-json                          # Checks json files for parseable syntax
+    -   id: check-toml                          # Checks toml files for parseable syntax
+    -   id: check-case-conflict                 # Check for files that would conflict in case-insensitive filesystems
+    -   id: check-added-large-files             # Prevent giant files from being committed
+    -   id: check-merge-conflict                # Check for files that contain merge conflict strings
+    -   id: check-symlinks                      # Checks for symlinks which do not point to anything
+    -   id: pretty-format-json                  # Sets a standard for formatting JSON files
+    -   id: detect-private-key                  # Detects the presence of private keys
+    -   id: end-of-file-fixer                   # Ensures that a file is either empty, or ends with one newline
+    -   id: forbid-new-submodules               # Prevent addition of new git submodules
+    -   id: mixed-line-ending                   # Replaces or checks mixed line ending
+    -   id: trailing-whitespace                 # Trims trailing whitespace
+
+-   repo: https://github.com/softwaremill/scala-pre-commit-hooks
+    rev: v0.3.0
+    hooks:
+    -   id: sbt-fatal-warnings              # Turns on -Xfatal-warnings, runs a clean compilation on the given scope
+    -   id: sbt-unused-imports              # Adds the "unused imports" warning
+    -   id: sbt-scalafmt                    # Runs scalafmtCheckAll
+    -   id: sbt-wartremover                 # Runs the WartRemover - a flexible scala linter
+        args: [--warts=Warts.unsafe]
