@@ -6,7 +6,8 @@ WORKDIR /prv
 RUN apk update && \
     apk upgrade && \
     apk add --no-cache git && \
-    apk add --no-cache --virtual .build-deps build-base && \
+    apk add --no-cache --virtual .build-deps build-base libffi-dev openssl-dev && \
+    pip3 install --upgrade pip && \
     pip3 install pre-commit && \
     pre-commit install-hooks && \
     apk del .build-deps
