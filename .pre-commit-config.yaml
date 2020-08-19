@@ -59,8 +59,8 @@ repos:
     hooks:
     -   id: flake8                  # a command-line utility for enforcing style consistency across Python projects
 
--   repo: https://github.com/doublify/pre-commit-isort
-    rev: v4.3.0
+-   repo: https://github.com/timothycrosley/isort
+    rev: 5.4.2
     hooks:
     -   id: isort                   # Sort and organize Python imports
-        args: [ -m 2, -l 100 ]
+        args: [ -m=3, -tc, -l 100 ]
