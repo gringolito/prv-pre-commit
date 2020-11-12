@@ -1,0 +1,53 @@
+---
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+    - repo: https://github.com/pre-commit/pre-commit-hooks
+      rev: v3.3.0
+      hooks:
+          - id: check-yaml                      # Checks yaml files for parseable syntax
+          - id: check-json                      # Checks json files for parseable syntax
+          - id: check-toml                      # Checks toml files for parseable syntax
+          - id: check-executables-have-shebangs # Ensures that (non-binary) executables have a shebang
+          - id: check-case-conflict             # Check for files that would conflict in case-insensitive filesystems
+          - id: check-added-large-files         # Prevent giant files from being committed
+          - id: check-merge-conflict            # Check for files that contain merge conflict strings
+          - id: check-symlinks                  # Checks for symlinks which do not point to anything
+          - id: pretty-format-json              # Sets a standard for formatting JSON files
+          - id: detect-private-key              # Detects the presence of private keys
+          - id: end-of-file-fixer               # Ensures that a file is either empty, or ends with one newline
+          - id: fix-encoding-pragma             # Add # -*- coding: utf-8 -*- to the top of python files
+          - id: forbid-new-submodules           # Prevent addition of new git submodules
+          - id: mixed-line-ending               # Replaces or checks mixed line ending
+          - id: trailing-whitespace             # Trims trailing whitespace
+
+    - repo: https://github.com/jumanjihouse/pre-commit-hooks
+      rev: 2.1.4
+      hooks:
+          - id: forbid-binary    # Forbid binary files from being committed
+          - id: shellcheck       # Shell scripts conform to shellcheck
+
+    - repo: https://github.com/jumanjihouse/pre-commit-hook-yamlfmt
+      rev: 0.1.0
+      hooks:
+          - id: yamlfmt          # Format YAML files
+
+    - repo: https://github.com/cheshirekow/cmake-format-precommit
+      rev: v0.6.13
+      hooks:
+          - id: cmake-format      # cmake-format can format your listfiles nicely so that they don't look like crap.
+
+    - repo: https://github.com/bmorcos/pre-commit-hooks-cpp
+      rev: 9a5aa38207bf557961110d6a4f7e3a9d352911f9
+      hooks:
+          - id: clang-format
+            args: [--style=file]
+          - id: cpplint
+            args: [--root=.., --linelength=100, --filter=-whitespace]
+          - id: cppcheck
+            args: [--std=c++11, --language=c++]
+
+    - repo: https://github.com/gringolito/cpp-pre-commit-hooks
+      rev: v0.1.1
+      hooks:
+          - id: check-using-namespace-directive
