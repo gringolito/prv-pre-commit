@@ -1,16 +1,21 @@
-FROM python:3.7-alpine
+FROM python:3.7-alpine AS pre-commit
 
-COPY . /prv
+COPY python-3.7/.pre-commit-config.yaml /prv/
+COPY pre-commit-run.sh /prv/
 WORKDIR /prv
 
 RUN apk update && \
-    apk upgrade && \
-    apk add --no-cache git && \
+    apk upgrade
+
+RUN apk add --no-cache git && \
     apk add --no-cache --virtual .build-deps build-base libffi-dev openssl-dev && \
     pip3 install --upgrade pip && \
     pip3 install pre-commit && \
+    git init . && \
     pre-commit install-hooks && \
     apk del .build-deps
+
+FROM pre-commit
 
 WORKDIR /app
 
