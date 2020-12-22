@@ -1,8 +1,8 @@
-FROM conanio/clang10 AS pre-commit
+FROM conanio/clang9 AS pre-commit
 
 USER root
 
-COPY cpp-clang10/.pre-commit-config.yaml /prv/
+COPY cpp/.pre-commit-config.yaml /prv/
 COPY pre-commit-run.sh /prv/
 WORKDIR /prv
 
@@ -17,8 +17,8 @@ RUN apt install -y git python3 python3-pip && \
 
 FROM pre-commit
 
-RUN apt install -y shellcheck cppcheck clang-format-10 && \
-    update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-10 100 && \
+RUN apt install -y shellcheck cppcheck clang-format-9 && \
+    update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-9 100 && \
     pip3 install cpplint
 
 WORKDIR /app
